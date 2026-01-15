@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+sqlmodel
+psycopg[binary]
+torch
+xarray
+dask
+netCDF4
+h5netcdf
+matplotlib
+#cartopy
+python-dotenv
+requests
+tqdm
