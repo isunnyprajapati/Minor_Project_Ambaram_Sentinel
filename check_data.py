@@ -1,14 +1,17 @@
-import os
+import psycopg2
 
-import xarray as xr
-
-stuff = "data/3DIMG_24MAY2024_0800_L1B_STD_V01R00_B3.h5"
-
-if os.path.exists(stuff):
-    data = xr.open_dataset(stuff)
-    print("--- INFO ---")
-    print(data)
-    print("\n--- VARS ---")
-    print(data.data_vars)
-else:
-    print("File not found in data folder")
+db = {
+    "dbname": "weather_db",
+    "user": "postgres",
+    "password": "2118",
+    "host": "127.0.0.1",
+    "port": "5757",
+}
+try:
+    c = psycopg2.connect(**db)
+    cur = c.cursor()
+    cur.execute("SELECT count(*) FROM weatheralert")
+    print(cur.fetchone()[0])
+    c.close()
+except Exception as e:
+    print(e)
